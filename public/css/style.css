@@ -1,0 +1,155 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  zoom: none;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100vh;
+  scroll-behavior: smooth;
+  font-family: Arial, sans-serif;
+}
+
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.timer_content {
+  display: flex;
+  flex-direction: column;
+  background-color: #2C303D;
+  width: 650.4px;
+  height: 428px;
+  justify-content: center;
+  border-radius: 8px;
+}
+.timer_content .header_wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 286.63px;
+  padding: 12px;
+}
+.timer_content .header_wrapper .mode_options {
+  display: flex;
+}
+.timer_content .header_wrapper .mode_options button {
+  display: flex;
+  align-items: center;
+}
+.timer_content .header_wrapper .mode_options button i {
+  color: #A8C7FA;
+}
+.timer_content .header_wrapper .funcionalities_options {
+  display: flex;
+  color: #EEF0FF;
+}
+.timer_content .header_wrapper .funcionalities_options div {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background-color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.timer_content .header_wrapper .funcionalities_options div i {
+  color: #A8C7FA;
+}
+.timer_content .header_wrapper .funcionalities_options div:hover {
+  background-color: #3A3F50;
+}
+.timer_content .body_wrapper {
+  padding-top: 12px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.timer_content .body_wrapper .time {
+  width: 300px;
+  height: 312px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.timer_content .body_wrapper .time .timer {
+  max-width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+.timer_content .body_wrapper .time .timer input {
+  background-color: inherit;
+  font-size: 45px;
+  font-family: Arial, sans-serif;
+  color: #EEF0FF;
+  border: none;
+  border-bottom: 1px solid #3A3F50;
+  width: 294px;
+  height: 60px;
+  text-align: center;
+}
+.timer_content .body_wrapper .time .timer input::placeholder {
+  color: #EEF0FF;
+  font-family: Arial, sans-serif;
+}
+.timer_content .body_wrapper .time .increase_time {
+  display: flex;
+  gap: 4px;
+  padding: 24px 14px;
+}
+.timer_content .start {
+  margin: 0px 6px 12px 12px;
+}
+
+.btn {
+  background-color: inherit;
+}
+
+.btn_mode_options {
+  background-color: inherit;
+  color: #EEF0FF;
+  padding: 8px 12px;
+  border: none;
+}
+
+.btn_mode_options:active {
+  background-color: #34517D;
+}
+
+.btn_mode_options.selected {
+  background-color: inherit;
+  color: #EEF0FF;
+}
+
+.btn_increase_time_to {
+  background-color: #3A3F50;
+  padding: 8px 12px;
+  color: #EEF0FF;
+  border: none;
+  border-radius: 9999px;
+}
+
+.btn_start {
+  background-color: #A8C7FA;
+  border: none;
+  border-radius: 9999px;
+  width: 632.4px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=style.css.map */

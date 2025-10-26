@@ -1,0 +1,42 @@
+@use "../abstracts" as *;
+@use "../base" as *;
+
+.btn{
+    background-color: inherit;
+}
+
+.btn_mode_options{
+    background-color: inherit;
+    color: $lavender;
+    padding: 8px 12px;
+    border: none;
+}
+
+.btn_mode_options:active{
+    background-color: $yinmn_blue;
+}
+
+.btn_mode_options.selected{
+    background-color: inherit;
+    color: $lavender;
+}
+
+.btn_increase_time_to{
+    background-color: $charcoal;
+    padding: 8px 12px;
+    color: $lavender;
+    border: none;
+    border-radius: 9999px;
+}
+
+.btn_start{
+    background-color: $jordy-blue;
+    // padding: 0px 100px;
+    border: none;
+    border-radius: 9999px;
+    width: 632.4px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

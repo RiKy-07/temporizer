@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <title>Timer</title>
+</head>
+<body>
+    <div class="timer_content">
+
+        <div class="header_wrapper">
+            <div class="mode_options">
+                <div>
+                    <button class="btn btn_mode_options">
+                        <i class="fa-solid fa-hourglass fa-xl"></i>
+                        <p>Temporizador</p>
+                    </button>
+                </div>
+                <div>
+                    <button class="btn btn_mode_options" >
+                        <i class="fa-solid fa-stopwatch fa-xl"></i>
+                        <p>Cronómetro</p>
+                    </button>
+                </div>
+            </div>
+            <div class="funcionalities_options">
+                <div>
+                <i class="fa-solid fa-volume-high fa-xl"></i>
+                </div>
+                <div>
+                <i class="fa-solid fa-expand fa-xl"></i>
+                </div>
+            </div>
+        </div>
+        <div class="body_wrapper">
+            <div class="time">
+                <div class="timer">
+                    <input type="text" name="" id="current_time" value="05:00"  min=0>
+                </div>
+                <div class="increase_time">
+                    <button class="btn btn_increase_time_to" id="btn_increase_time_to_30s">+0:30</button>
+                    <button class="btn btn_increase_time_to" id="btn_increase_time_to_1min">+1:00</button>
+                    <button class="btn btn_increase_time_to" id="btn_increase_time_to_5min">+5:00</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="start">
+            <button class="btn btn_start">
+                <i class="fa-solid fa-play fa-sm"></i>
+            </button>
+        </div>
+
+    </div>
+
+    <script src="https://kit.fontawesome.com/ea4c1917d6.js" crossorigin="anonymous"></script>
+    <script src="./public/scripts/main.js"></script>
+</body>
+</html>
