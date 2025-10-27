@@ -36,7 +36,8 @@
         <div class="body_wrapper">
             <div class="time">
                 <div class="timer">
-                    <input type="text" name="" id="current_time" value="05:00"  min=0>
+                    <input type="text" name="" id="current_time" value="05:00"/>
+                     <!-- <div id="current_time" ><h1>05:00</h1></div> -->
                 </div>
                 <div class="increase_time">
                     <button class="btn btn_increase_time_to" id="btn_increase_time_to_30s">+0:30</button>
@@ -48,7 +49,7 @@
         </div>
 
         <div class="start">
-            <button class="btn btn_start">
+            <button class="btn btn_start" onclick="start_timer()">
                 <i class="fa-solid fa-play fa-sm"></i>
             </button>
         </div>
