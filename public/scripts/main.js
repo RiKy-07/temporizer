@@ -6,7 +6,6 @@ let interval;
 let minutes;
 let seconds;
 
-
 function get_current_time() {
   let current_time = timeInput.value;
   let [minutes, seconds] = current_time.split(":").map(Number);
@@ -22,9 +21,9 @@ function get_current_time() {
   if (seconds >= 60) {
     let amountOfMinutes = Math.floor(seconds / 60);
     let restOfSeconds = seconds - amountOfMinutes * 60;
-    seconds = seconds - 59;
+    seconds = seconds - 60;
     minutes += amountOfMinutes;
-    seconds = restOfSeconds + 1;
+    seconds = restOfSeconds;
     }else if (isNaN(seconds)){
         seconds = 0;
     }else if (seconds == undefined){
@@ -33,18 +32,19 @@ function get_current_time() {
         seconds = 0;
   }
 
-  return { minutes, seconds };
+  return { minutes, seconds};
 }
 
 function update_display(minutes, seconds) {
   let formatted = String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
   timeInput.value = formatted;
+ 
 }
 
-function prevent_negatives() {}
 
 function start_timer() {
   clearInterval(interval);
+
 
   let { minutes, seconds } = get_current_time();
 
@@ -82,109 +82,40 @@ startBtn.addEventListener("click", () => {
   }
 });
 
-increaseTime.addEventListener("click", () => {
-    const btn = increaseTime.querySelector(".btn_increase_time_to")
+increaseTime.addEventListener("click", (event) => {
 
-    console.log(btn.id);
-    if (btn.id.includes("btn_increase_time_to_30s")){
-        seconds = seconds + 30;
-        update_display(minutes, seconds = seconds + 30);
+    const icon = startBtn.querySelector("i");
+    const timer_was_running = icon.classList.contains("fa-pause");
 
-    }else if(btn.id.includes("btn_increase_time_to_1min")){
-        minutes = minutes + 1;
-        update_display(minutes = minutes + 1, seconds);
-
-    }else if(btn.id.includes("btn_increase_time_to_1min")){
-        minutes = minutes + 5;
+    if (timer_was_running){
+        stop_timer()
     }
-})
 
+    let current = get_current_time();
+    let newMinutes = current.minutes;
+    let newSeconds = current.seconds;
 
+     if (event.target.classList.contains('btn_increase_time_to')){
+        const clickedButtonId = event.target.id;
+        console.log(`Button with ID: ${clickedButtonId} was clicked.`);
 
-// function get_current_time() {
-//   let current_time = document.querySelector("#current_time");
-//   let time_value = [];
-//   time_value = current_time.replace(/\D/g, "").split("").map(Number);
-//   return time_value;
-// }
+        if (clickedButtonId === 'btn_increase_time_to_30s') {
+            newSeconds += 30;
+        } else if (clickedButtonId === 'btn_increase_time_to_1min') {
+            newMinutes += 1;
+        } else if (clickedButtonId === 'btn_increase_time_to_5min') {
+            newMinutes += 5;
+        }
+    }
 
-// function get_minutes(){
-//     let time_value = get_current_time();
-//     return time_value.slice(0,-2).join("");
-// }
+    if(newSeconds >= 60){
+        newMinutes += Math.floor(newSeconds/60);
+        newSeconds = newSeconds%60;
+    }
 
-// function get_seconds(){
-//     let time_value = get_current_time();
-//     return time_value.slice(2).join("");
-// }
+    update_display(newMinutes, newSeconds);
 
-// function increase_30s(){
-//     let current_seconds = Number(get_seconds());
-//     current_seconds = current_seconds + 30;
-//     return current_seconds;
-// }
-
-// function increase_1min(){
-//     let current_minutes = Number(get_minutes());
-//     current_minutes = current_minutes+1;
-//     return current_minutes;
-// }
-
-// function increase_5min(){
-//     let current_minutes = Number(get_minutes());
-//     current_minutes = current_minutes+5;
-//     return current_minutes;
-// }
-
-// function increase_time(){
-//     let input = document.querySelector('#current_time').value;
-//     let minutes = get_minutes();
-//     let seconds = get_seconds();
-//     let btn = document.querySelector('.btn_increase_time_to');
-
-//     window.addEventListener('click', (event) => {
-//     const element = event.target;
-// })
-
-// }
-
-// function update_time(){
-//     return time.innerHTML = get_minutes()+":"+get_seconds();
-// }
-
-// function start_timer(){
-//     let time_value = get_current_time();
-//     let minute = get_minutes();
-//     let second = get_seconds();
-//     let current_time = document.querySelector('#current_time');
-
-//     let start = document.querySelector('.btn.btn_start');
-//     let interval;
-//     start.addEventListener('click',()=>{
-//     interval = setInterval(watch, 10)
-//     current_time.id = 'current_time'
-// })
-// }
-
-// function watch() {
-//     let minute = get_minutes();
-//     let second = get_seconds();
-//     let current_time = document.querySelector('#current_time');
-
-//     second++
-//     if(second==60){
-//         minute++
-//         second=00;
-//     }
-//    current_time.innerHTML=twod(minute)+':'+twod(second)
-
-// }
-
-// function twod(digit){
-//     if(digit < 10){
-//         return ('0' +digit)
-//     }
-//     else{
-//         return digit
-//     }
-// }
+    if (timer_was_running){
+        start_timer();
+    }
+});
