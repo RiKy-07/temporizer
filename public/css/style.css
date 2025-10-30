@@ -24,36 +24,38 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.timer_content {
-  display: flex;
-  flex-direction: column;
-  background-color: #2C303D;
-  width: 650.4px;
-  height: 428px;
-  justify-content: center;
-  border-radius: 8px;
+.disable-element {
+  display: none;
 }
-.timer_content .header_wrapper {
+
+.wrapper {
+  display: flex;
+  position: relative;
+  width: 650px;
+  height: 442px;
+}
+
+.header_wrapper {
   display: flex;
   justify-content: space-between;
   gap: 286.63px;
-  padding: 12px;
+  padding: 12px 12px 12px 12px;
+  position: absolute;
+  width: 100%;
+  z-index: 99;
 }
-.timer_content .header_wrapper .mode_options {
+.header_wrapper .mode_options {
   display: flex;
 }
-.timer_content .header_wrapper .mode_options button {
+.header_wrapper .mode_options button {
   display: flex;
   align-items: center;
 }
-.timer_content .header_wrapper .mode_options button i {
-  color: #A8C7FA;
-}
-.timer_content .header_wrapper .funcionalities_options {
+.header_wrapper .funcionalities_options {
   display: flex;
   color: #EEF0FF;
 }
-.timer_content .header_wrapper .funcionalities_options div {
+.header_wrapper .funcionalities_options div {
   width: 36px;
   height: 36px;
   border-radius: 9999px;
@@ -62,30 +64,37 @@ body {
   justify-content: center;
   align-items: center;
 }
-.timer_content .header_wrapper .funcionalities_options div i {
+.header_wrapper .funcionalities_options div i {
   color: #A8C7FA;
 }
-.timer_content .header_wrapper .funcionalities_options div:hover {
+.header_wrapper .funcionalities_options div:hover {
   background-color: #3A3F50;
 }
-.timer_content .body_wrapper {
-  padding-top: 12px;
+
+.timer_content {
+  display: flex;
+  flex-direction: column;
+  background-color: #2C303D;
+  justify-content: space-around;
+  border-radius: 8px;
   width: 100%;
   height: 100%;
+}
+.timer_content .body_wrapper {
+  width: 300px;
+  height: 300px;
   margin: auto;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .timer_content .body_wrapper .time {
-  width: 300px;
-  height: 312px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .timer_content .body_wrapper .time .timer {
-  max-width: max-content;
   margin-left: auto;
   margin-right: auto;
 }
@@ -112,33 +121,337 @@ body {
 .timer_content .start {
   margin: 0px 6px 12px 12px;
 }
+.timer_content .working {
+  display: none;
+  margin: 0px 6px 12px 12px;
+}
+
+.timer_content_working {
+  display: flex;
+  flex-direction: column;
+  background-color: #2C303D;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 12px 0px 0px 0px;
+  width: 100%;
+  height: 100%;
+}
+.timer_content_working .body_wrapper {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.timer_content_working .body_wrapper .time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.timer_content_working .body_wrapper .time .timer {
+  margin-left: auto;
+  margin-right: auto;
+}
+.timer_content_working .body_wrapper .time .timer input {
+  background-color: inherit;
+  font-size: 45px;
+  font-family: Arial, sans-serif;
+  color: #EEF0FF;
+  border: none;
+  width: 294px;
+  text-align: center;
+}
+.timer_content_working .body_wrapper .time .timer input::placeholder {
+  color: #EEF0FF;
+  font-family: Arial, sans-serif;
+}
+.timer_content_working .body_wrapper .time .increase_time {
+  display: none;
+  gap: 4px;
+  padding: 24px 14px;
+}
+.timer_content_working .start {
+  display: none;
+  margin: 0px 6px 12px 12px;
+}
+.timer_content_working .working {
+  display: flex;
+  margin: 0px 6px 12px 12px;
+}
+
+.timer_content_paused {
+  display: flex;
+  flex-direction: column;
+  background-color: #353028;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding: 12px 0px 0px 0px;
+  width: 100%;
+  height: 100%;
+}
+.timer_content_paused .body_wrapper {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.timer_content_paused .body_wrapper .time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.timer_content_paused .body_wrapper .time .timer {
+  margin-left: auto;
+  margin-right: auto;
+}
+.timer_content_paused .body_wrapper .time .timer input {
+  background-color: inherit;
+  font-size: 45px;
+  font-family: Arial, sans-serif;
+  color: #FFEED9;
+  border: none;
+  border-bottom: 1px solid #685D4C;
+  width: 294px;
+  text-align: center;
+}
+.timer_content_paused .body_wrapper .time .timer input::placeholder {
+  color: #FFEED9;
+  font-family: Arial, sans-serif;
+}
+.timer_content_paused .body_wrapper .time .increase_time {
+  display: flex;
+  gap: 4px;
+  padding: 24px 14px;
+}
+.timer_content_paused .body_wrapper .time .increase_time #btn_increase_time_to_5min {
+  display: none;
+}
+.timer_content_paused .start {
+  display: none;
+  margin: 0px 6px 12px 12px;
+}
+.timer_content_paused .working {
+  display: flex;
+  margin: 0px 6px 12px 12px;
+}
+
+.timer_content_finished {
+  display: flex;
+  flex-direction: column;
+  background-color: #3D2C2E;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 12px 0px 0px 0px;
+  width: 100%;
+  height: 100%;
+}
+.timer_content_finished .body_wrapper {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.timer_content_finished .body_wrapper .time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.timer_content_finished .body_wrapper .time .timer {
+  margin-left: auto;
+  margin-right: auto;
+}
+.timer_content_finished .body_wrapper .time .timer input {
+  background-color: inherit;
+  font-size: 45px;
+  font-family: Arial, sans-serif;
+  color: #FFECED;
+  border: none;
+  width: 294px;
+  text-align: center;
+}
+.timer_content_finished .body_wrapper .time .timer input::placeholder {
+  color: #FFECED;
+  font-family: Arial, sans-serif;
+}
+.timer_content_finished .body_wrapper .time .increase_time {
+  display: none;
+  gap: 4px;
+  padding: 24px 14px;
+}
+.timer_content_finished .body_wrapper .time .increase_time #btn_increase_time_to_5min {
+  display: none;
+}
+.timer_content_finished .start {
+  display: none;
+  margin: 0px 6px 12px 12px;
+}
+.timer_content_finished .working {
+  display: flex;
+  margin: 0px 6px 12px 12px;
+}
+
+.stopwatch_content {
+  flex-direction: column;
+  background-color: #2C303D;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 12px 0px 0px 0px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.stopwatch_content .body_wrapper {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.stopwatch_content .body_wrapper .time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.stopwatch_content .body_wrapper .time #stopwatch {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+  font-size: 45px;
+  font-family: Arial, sans-serif;
+  color: #EEF0FF;
+  text-align: center;
+}
+.stopwatch_content .start {
+  margin: 0px 6px 12px 12px;
+}
+.stopwatch_content .working {
+  display: none;
+  margin: 0px 6px 12px 12px;
+}
+
+.stopwatch_content_working {
+  flex-direction: column;
+  background-color: #2C303D;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 12px 0px 0px 0px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.stopwatch_content_working .body_wrapper {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.stopwatch_content_working .body_wrapper .time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.stopwatch_content_working .body_wrapper .time #stopwatch {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+  font-size: 45px;
+  font-family: Arial, sans-serif;
+  color: #EEF0FF;
+  text-align: center;
+}
+.stopwatch_content_working .start {
+  display: none;
+  margin: 0px 6px 12px 12px;
+}
+.stopwatch_content_working .working {
+  display: flex;
+  margin: 0px 6px 12px 12px;
+}
+
+.stopwatch_content_paused {
+  flex-direction: column;
+  background-color: #353028;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 12px 0px 0px 0px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.stopwatch_content_paused .body_wrapper {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.stopwatch_content_paused .body_wrapper .time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.stopwatch_content_paused .body_wrapper .time #stopwatch {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+  font-size: 45px;
+  font-family: Arial, sans-serif;
+  color: #FFEED9;
+  text-align: center;
+}
+.stopwatch_content_paused .start {
+  display: none;
+  margin: 0px 6px 12px 12px;
+}
+.stopwatch_content_paused .working {
+  display: flex;
+  margin: 0px 6px 12px 12px;
+}
 
 .btn {
-  background-color: inherit;
-}
-
-.btn_mode_options {
-  background-color: inherit;
-  color: #EEF0FF;
   padding: 8px 12px;
   border: none;
-}
-
-.btn_mode_options:active {
-  background-color: #34517D;
-}
-
-.btn_mode_options.selected {
-  background-color: inherit;
-  color: #EEF0FF;
-}
-
-.btn_increase_time_to {
-  background-color: #3A3F50;
-  padding: 8px 12px;
-  color: #EEF0FF;
-  border: none;
+  width: 126.183;
+  height: 36px;
   border-radius: 9999px;
+  display: flex;
+  gap: 0.3rem;
+  background-color: #2C303D;
+}
+.btn i {
+  color: #A8C7FA;
+}
+
+.btn_background {
+  background-color: #34517D;
+  color: lavender;
+}
+.btn_background i {
+  color: #EEF0FF;
+}
+
+.btn_mode_options_timer {
+  color: #EEF0FF;
+}
+
+.btn_mode_options_stopwatch {
+  color: #EEF0FF;
 }
 
 .btn_start {
@@ -150,6 +463,213 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.btn_start i {
+  color: #3A3F50;
+}
+
+.btn_stop {
+  background-color: #3A3F50;
+  width: 310.2px;
+  height: 44px;
+  margin: 0px 6px 0px 12px;
+  border: none;
+  border-radius: 9999px;
+  color: #EEF0FF;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_restart {
+  background-color: #3A3F50;
+  width: 310.2px;
+  height: 44px;
+  margin: 0px 12px 0px 0px;
+  border: none;
+  border-radius: 9999px;
+  color: #EEF0FF;
+  justify-content: center;
+  align-items: center;
+}
+.btn_restart .btn_restart:hover {
+  background: rgba(238, 240, 255, 0.0784313725);
+}
+.btn_restart .btn_restart:active {
+  background: rgba(238, 240, 255, 0.2392156863);
+}
+
+.timer_content .btn_increase_time_to {
+  background-color: #3A3F50;
+  padding: 8px 12px;
+  color: #EEF0FF;
+  border: none;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+}
+
+.timer_content_working .btn_mode_options_timer {
+  background-color: #34517D;
+  color: #EEF0FF;
+  padding: 8px 12px;
+  border: none;
+  width: 126.183;
+  height: 36px;
+  border-radius: 9999px;
+  display: flex;
+  gap: 0.3rem;
+}
+.timer_content_working .btn_mode_options_stopwatch {
+  background-color: inherit;
+  color: #EEF0FF;
+  padding: 8px 12px;
+  border: none;
+  width: 126.183;
+  height: 36px;
+  border-radius: 9999px;
+  display: flex;
+  gap: 0.3rem;
+}
+.timer_content_working .btn_mode_options_stopwatch i {
+  color: #A8C7FA;
+}
+.timer_content_working .btn_increase_time_to {
+  background-color: #4C463D;
+  padding: 8px 12px;
+  color: #FFEED9;
+  border: none;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+}
+.timer_content_working .btn_stop {
+  background-color: #3A3F50;
+}
+.timer_content_working .btn_restart {
+  background-color: #3A3F50;
+}
+
+.timer_content_paused .btn_mode_options_timer {
+  background-color: #7E5700;
+  color: #FFEED9;
+  padding: 8px 12px;
+  border: none;
+  width: 126.183;
+  height: 36px;
+  border-radius: 9999px;
+  display: flex;
+  gap: 0.3rem;
+}
+.timer_content_paused .btn_mode_options_stopwatch {
+  background-color: inherit;
+  color: #FFEED9;
+  padding: 8px 12px;
+  border: none;
+  width: 126.183;
+  height: 36px;
+  border-radius: 9999px;
+  display: flex;
+  gap: 0.3rem;
+}
+.timer_content_paused .btn_mode_options_stopwatch i {
+  color: #F7BD54;
+}
+.timer_content_paused .btn_increase_time_to {
+  background-color: #4C463D;
+  padding: 8px 12px;
+  color: #FFEED9;
+  border: none;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+}
+.timer_content_paused .btn_stop {
+  background-color: #7E5700;
+}
+.timer_content_paused .btn_stop i {
+  color: #FFEED9;
+}
+.timer_content_paused .btn_restart {
+  background-color: #7E5700;
+}
+.timer_content_paused .btn_restart i {
+  color: #FFEED9;
+}
+
+.timer_content_finished .btn_mode_options_timer {
+  background-color: #7D293A;
+  color: #FFECED;
+  padding: 8px 12px;
+  border: none;
+  width: 126.183;
+  height: 36px;
+  border-radius: 9999px;
+  display: flex;
+  gap: 0.3rem;
+}
+.timer_content_finished .btn_mode_options_timer i {
+  color: #FFB2BC;
+}
+.timer_content_finished .btn_mode_options_stopwatch {
+  background-color: inherit;
+  color: #FFB2BC;
+  padding: 8px 12px;
+  border: none;
+  width: 126.183;
+  height: 36px;
+  border-radius: 9999px;
+  display: flex;
+  gap: 0.3rem;
+}
+.timer_content_finished .btn_mode_options_stopwatch i {
+  color: #FFB2BC;
+}
+.timer_content_finished .btn_stop {
+  display: none;
+}
+.timer_content_finished .btn_restart {
+  background-color: #7D293A;
+  color: #FFECED;
+  width: 100%;
+}
+
+.btn_increase_time_to {
+  padding: 8px 12px;
+  color: #EEF0FF;
+  border: none;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
+}
+
+.stopwatch_content_working .btn_stop {
+  background-color: #3A3F50;
+}
+.stopwatch_content_working .btn_stop i {
+  color: #EEF0FF;
+}
+.stopwatch_content_working .btn_restart {
+  background-color: #3A3F50;
+}
+.stopwatch_content_working .btn_restart i {
+  color: #EEF0FF;
+}
+
+.stopwatch_content_paused .btn_stop {
+  background-color: #7E5700;
+}
+.stopwatch_content_paused .btn_stop i {
+  color: #EEF0FF;
+}
+.stopwatch_content_paused .btn_restart {
+  background-color: #7E5700;
+}
+.stopwatch_content_paused .btn_restart i {
+  color: #EEF0FF;
 }
 
 .fa-solid {

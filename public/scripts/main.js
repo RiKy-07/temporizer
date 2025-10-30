@@ -1,12 +1,45 @@
-let timeInput = document.querySelector("#current_time");
-let startBtn = document.querySelector(".btn_start");
-let increaseTime = document.querySelector(".increase_time");
 
-let interval;
+
+let timer_interval;
 let minutes;
 let seconds;
 
-function get_current_time() {
+let timeInput = document.querySelector("#current_time");
+let timer_startBtn = document.querySelector(".timer_btn_start");
+let timer_stopBtn = document.querySelector(".timer_btn_stop");
+let timer_restartBtn = document.querySelector(".timer_btn_restart");
+
+let increaseTime = document.querySelector(".increase_time");
+let ui_container = document.querySelector(".wrapper");
+ 
+const btn_timer = ui_container.querySelector(".btn_timer");
+const btn_stopwatch = ui_container.querySelector(".btn_stopwatch");
+
+const timer_content = ui_container.querySelector(".timer_content");
+const stopwatch_content = ui_container.querySelector(".stopwatch_content");
+
+btn_stopwatch.onclick = () => {
+  if(!btn_stopwatch.classList.contains("btn_background")){
+    btn_stopwatch.classList.add("btn_background");
+    btn_timer.classList.remove("btn_background");
+
+    stopwatch_content.classList.remove("disable-element");
+    timer_content.classList.add("disable-element");
+  }
+}
+
+btn_timer.onclick = () => {
+  if(!btn_timer.classList.contains("btn_background")){
+
+    btn_timer.classList.add("btn_background");
+    btn_stopwatch.classList.remove("btn_background");
+
+    timer_content.classList.remove("disable-element");
+    stopwatch_content.classList.add("disable-element");
+  }
+}
+
+function timer_get_current_time() {
   let current_time = timeInput.value;
   let [minutes, seconds] = current_time.split(":").map(Number);
 
@@ -35,20 +68,19 @@ function get_current_time() {
   return { minutes, seconds};
 }
 
-function update_display(minutes, seconds) {
+function timer_update_display(minutes, seconds) {
   let formatted = String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
   timeInput.value = formatted;
  
 }
 
-
 function start_timer() {
-  clearInterval(interval);
+  clearInterval(timer_interval);
 
 
-  let { minutes, seconds } = get_current_time();
+  let { minutes, seconds } = timer_get_current_time();
 
-  interval = setInterval(() => {
+  timer_interval = setInterval(() => {
     if (minutes == 0 && seconds == 0) {
       stop_timer();
     } else {
@@ -62,42 +94,74 @@ function start_timer() {
         minutes--;
       }
     }
-    update_display(minutes, seconds);
+    timer_update_display(minutes, seconds);
   }, 1000);
 }
 
 function stop_timer() {
-  clearInterval(interval);
+  clearInterval(timer_interval);
 }
 
-startBtn.addEventListener("click", () => {
-  const icon = startBtn.querySelector("i");
+timer_startBtn.addEventListener("click", () => {
+  const icon = timer_startBtn.querySelector("i");
 
-  if (icon.classList.contains("fa-play")) {
-    icon.classList.replace("fa-play", "fa-pause");
+  if (icon.classList.contains("fa-play") && timer_content.classList.contains("timer_content")) {
+    timer_content.classList.replace("timer_content", "timer_content_working");
     start_timer();
-  } else {
+  }
+
+});
+
+timer_stopBtn.addEventListener("click", () => {
+  const icon = timer_stopBtn.querySelector("i");
+
+  if (icon.classList.contains("fa-pause") && timer_content.classList.contains("timer_content_working")) {
     icon.classList.replace("fa-pause", "fa-play");
+    timer_content.classList.replace("timer_content_working", "timer_content_paused");
+    stop_timer();
+
+  }else if (icon.classList.contains("fa-play") && timer_content.classList.contains("timer_content_paused")) {
+    icon.classList.replace("fa-play", "fa-pause");
+    timer_content.classList.replace("timer_content_paused", "timer_content_working");
+    start_timer();
+  }
+
+});
+
+timer_restartBtn.addEventListener("click", () => {
+  const icon = timer_restartBtn.querySelector("i");
+
+  if (icon.classList.contains("fa-rotate-left") && timer_content.classList.contains("timer_content_working")) {
+    timer_content.classList.replace("timer_content_working", "timer_content");
+    // icon.classList.replace("fa-play", "fa-pause");
+    stop_timer();
+  } else if (icon.classList.contains("fa-rotate-left") && timer_content.classList.contains("timer_content_paused")) {
+    timer_content.classList.replace("timer_content_paused", "timer_content");
+    timer_stopBtn.querySelector("i").classList.replace("fa-play", "fa-pause");
+    stop_timer();
+  } 
+  else if (icon.classList.contains("fa-rotate-left") && timer_content.classList.contains("timer_content_finished")) {
+    timer_content.classList.replace("timer_content_finished", "timer_content");
+    icon.classList.replace("fa-play", "fa-pause");
     stop_timer();
   }
 });
 
 increaseTime.addEventListener("click", (event) => {
 
-    const icon = startBtn.querySelector("i");
+    const icon = timer_startBtn.querySelector("i");
     const timer_was_running = icon.classList.contains("fa-pause");
 
     if (timer_was_running){
         stop_timer()
     }
 
-    let current = get_current_time();
+    let current = timer_get_current_time();
     let newMinutes = current.minutes;
     let newSeconds = current.seconds;
 
      if (event.target.classList.contains('btn_increase_time_to')){
         const clickedButtonId = event.target.id;
-        console.log(`Button with ID: ${clickedButtonId} was clicked.`);
 
         if (clickedButtonId === 'btn_increase_time_to_30s') {
             newSeconds += 30;
@@ -113,9 +177,119 @@ increaseTime.addEventListener("click", (event) => {
         newSeconds = newSeconds%60;
     }
 
-    update_display(newMinutes, newSeconds);
+    timer_update_display(newMinutes, newSeconds);
 
     if (timer_was_running){
         start_timer();
     }
+});
+
+// Stopwatch
+
+let startTime = document.querySelector("#stopwatch");
+
+let stopwatch_startBtn = document.querySelector(".stopwatch_btn_start");
+let stopwatch_stopBtn = document.querySelector(".stopwatch_btn_stop");
+let stopwatch_restartBtn = document.querySelector(".stopwatch_btn_restart");
+
+let stopwatch_interval;
+
+function stopwatch_get_current_time() {
+  let current_time = startTime.innerHTML;
+  let [hours, minutes, seconds, miliseconds] = current_time.split(".").map(Number);
+
+  if(minutes >= 60){
+    hours++;
+  }
+
+  if (seconds >= 60) {
+    minutes++;
+  }
+
+  if (miliseconds >=1000){
+    seconds++;
+  }
+
+  return { hours, minutes, seconds, miliseconds };
+}
+
+function stopwatch_update_display(hours, minutes, seconds, miliseconds) {
+    let formatted = String(hours).padStart(2, "0") + "." +String(minutes).padStart(2, "0") + "." + String(seconds).padStart(2, "0") + "." + String(miliseconds).padStart(2, "0");
+    startTime.innerHTML = formatted;
+    // startTime.innerHTML = toString(hours).padStart(2,"0") + "." + toString(minutes).padStart(2,"0") + "." + toString(seconds).padStart(2,"0") + "." + toString(miliseconds).padStart(2,"0");
+}
+
+function start_stopwatch() {
+  clearInterval(stopwatch_interval);
+
+
+  let { hours, minutes, seconds, miliseconds } = stopwatch_get_current_time();
+
+  stopwatch_interval = setInterval(() => {
+      miliseconds ++;
+
+      if (miliseconds >= 100) {
+        miliseconds = 0;
+        seconds ++;
+      }
+
+      if (seconds >= 60) {
+        seconds = 0;
+        minutes ++;
+      }
+
+      if (minutes >= 60) {
+        minutes = 0;
+        hours ++;
+      }
+
+      
+    stopwatch_update_display (hours, minutes, seconds, miliseconds);
+  }, 10);
+}
+
+function stop_stopwatch() {
+  clearInterval(stopwatch_interval);
+}
+
+stopwatch_startBtn.addEventListener("click", () => {
+  const icon = stopwatch_startBtn.querySelector("i");
+
+  if (icon.classList.contains("fa-play") && stopwatch_content.classList.contains("stopwatch_content")) {
+    stopwatch_content.classList.replace("stopwatch_content", "stopwatch_content_working");
+    start_stopwatch();
+  }
+
+});
+
+stopwatch_stopBtn.addEventListener("click", () => {
+  const icon = stopwatch_stopBtn.querySelector("i");
+
+  if (icon.classList.contains("fa-pause") && stopwatch_content.classList.contains("stopwatch_content_working")) {
+    icon.classList.replace("fa-pause", "fa-play");
+    stopwatch_content.classList.replace("stopwatch_content_working", "stopwatch_content_paused");
+    stop_stopwatch();
+  }else if (icon.classList.contains("fa-play") && stopwatch_content.classList.contains("stopwatch_content_paused")) {
+    icon.classList.replace("fa-play", "fa-pause");
+    stopwatch_content.classList.replace("stopwatch_content_paused", "stopwatch_content_working");
+    start_stopwatch();
+  }
+
+});
+
+stopwatch_restartBtn.addEventListener("click", () => {
+  const icon = stopwatch_restartBtn.querySelector("i");
+
+  if (icon.classList.contains("fa-rotate-left") && stopwatch_content.classList.contains("stopwatch_content_working")) {
+    stopwatch_content.classList.replace("stopwatch_content_working", "stopwatch_content");
+    icon.classList.replace("fa-pause", "fa-play");
+    stop_stopwatch();
+    
+  } else if (icon.classList.contains("fa-rotate-left") && stopwatch_content.classList.contains("stopwatch_content_paused")) {
+    stopwatch_content.classList.replace("stopwatch_content_paused", "stopwatch_content");
+    icon.classList.replace("fa-pause", "fa-play");
+    stopwatch_stopBtn.querySelector("i").classList.replace("fa-play", "fa-pause");
+    stop_stopwatch();
+  }
+
 });
