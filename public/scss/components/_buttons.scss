@@ -1,6 +1,7 @@
 @use "../abstracts" as *;
 @use "../base" as *;
 
+//Starting styles of the buttons
 .btn {
   padding: 8px 12px;
   border: none;
@@ -10,7 +11,7 @@
   display: flex;
   gap: 0.3rem;
   background-color: $gunmetal;
-  
+  color: $lavender;
   i {
     color: $jordy-blue;
   }
@@ -20,22 +21,61 @@
   background-color: $yinmn_blue;
   color: lavender;
 
-  i{
+  i {
     color: $lavender;
   }
 }
 
-.btn_mode_options_timer {
-  color: $lavender;
+.btn_timer {
+  padding: 8px 12px;
+  display: flex;
+  gap: 0.3rem;
 }
 
-.btn_mode_options_stopwatch {
-  color: $lavender;
+.btn_stopwatch {
+  padding: 8px 12px;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.btn_sound {
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    background-color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+        color: $jordy-blue;
+  }
+}
+
+.btn_expand {
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+    color: $jordy-blue;
+  }
+}
+
+.btn_increase_time_to {
+    background-color: $charcoal;
+    padding: 8px 12px;
+    color: $lavender;
+  border: none;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Arial, sans-serif;
 }
 
 .btn_start {
   background-color: $jordy-blue;
-  // padding: 0px 100px;
   border: none;
   border-radius: 9999px;
   width: 632.4px;
@@ -43,9 +83,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-//   z-index: 10;
-  i{
+  i {
     color: $charcoal;
+  }
+}
+
+.btn_restart {
+  background-color: $charcoal;
+  width: 310.2px;
+  height: 44px;
+  margin: 0px 12px 0px 0px;
+  border: none;
+  border-radius: 9999px;
+  justify-content: center;
+  align-items: center;
+  i {
+    color: $lavender;
   }
 }
 
@@ -59,235 +112,78 @@
   color: $lavender;
   justify-content: center;
   align-items: center;
+  i {
+    color: $lavender;
+  }
 }
 
-.btn_restart {
+// Button styles while working
+.working.btn_stop {
   background-color: $charcoal;
-  width: 310.2px;
-  height: 44px;
-  margin: 0px 12px 0px 0px;
-  border: none;
-  border-radius: 9999px;
   color: $lavender;
-  justify-content: center;
-  align-items: center;
-  .btn_restart:hover {
-    background: $charcoal-hover;
-  }
-  .btn_restart:active {
-    background: $charcoal-active;
-  }
+}
+.working.btn_restart {
+  background-color: $charcoal;
+  color: $lavender;
 }
 
-.timer_content {
-  .btn_increase_time_to {
-    background-color: $charcoal;
-    padding: 8px 12px;
-    color: $lavender;
-    border: none;
-    border-radius: 9999px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: Arial, sans-serif;
-  }
-}
-
-.timer_content_working {
-  .btn_mode_options_timer {
-    background-color: $yinmn_blue;
-    color: $lavender;
-    padding: 8px 12px;
-    border: none;
-    width: 126.183;
-    height: 36px;
-    border-radius: 9999px;
-    display: flex;
-    gap: 0.3rem;
-  }
-
-  .btn_mode_options_stopwatch {
-    background-color: inherit;
-    color: $lavender;
-    padding: 8px 12px;
-    border: none;
-    width: 126.183;
-    height: 36px;
-    border-radius: 9999px;
-    display: flex;
-    gap: 0.3rem;
-
-    i {
-      color: $jordy-blue;
-    }
-  }
-
-  .btn_increase_time_to {
-    background-color: $taupe;
-    padding: 8px 12px;
-    color: $antique-white;
-    border: none;
-    border-radius: 9999px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: Arial, sans-serif;
-  }
-
-  .btn_stop {
-    background-color: $charcoal;
-  }
-
-  .btn_restart {
-    background-color: $charcoal;
-  }
-}
-
-.timer_content_paused {
-.btn_mode_options_timer {
-    background-color: $field-drab;
-    color: $antique-white;
-    padding: 8px 12px;
-    border: none;
-    width: 126.183;
-    height: 36px;
-    border-radius: 9999px;
-    display: flex;
-    gap: 0.3rem; 
-  }
-
-  .btn_mode_options_stopwatch {
-    background-color: inherit;
-    color: $antique-white;
-    padding: 8px 12px;
-    border: none;
-    width: 126.183;
-    height: 36px;
-    border-radius: 9999px;
-    display: flex;
-    gap: 0.3rem;
-
-    i {
-      color: $xanthous;
-    }
-  }
-
-  .btn_increase_time_to {
-    background-color: $taupe;
-    padding: 8px 12px;
-    color: $antique-white;
-    border: none;
-    border-radius: 9999px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: Arial, sans-serif;
-  }
-
-  .btn_stop {
-    background-color: $field-drab;
-    i{
-        color: $antique-white;
-    }
-  }
-
-  .btn_restart {
-    background-color: $field-drab;
-    i{
-        color: $antique-white;
-    }
-  }
-}
-
-.timer_content_finished {
-  .btn_mode_options_timer {
-    background-color: $claret;
-    color: $lavender-blush;
-    padding: 8px 12px;
-    border: none;
-    width: 126.183;
-    height: 36px;
-    border-radius: 9999px;
-    display: flex;
-    gap: 0.3rem;
-
-    i {
-      color: $cherry-blossom-pink;
-    }
-  }
-
-  .btn_mode_options_stopwatch {
-    background-color: inherit;
-    color: $cherry-blossom-pink;
-    padding: 8px 12px;
-    border: none;
-    width: 126.183;
-    height: 36px;
-    border-radius: 9999px;
-    display: flex;
-    gap: 0.3rem;
-
-    i {
-      color: $cherry-blossom-pink;
-    }
-  }
-
-  .btn_stop {
-    display: none;
-  }
-
-  .btn_restart {
-    background-color: $claret;
-    color: $lavender-blush;
-    width: 100%;
-  }
-}
-
-.btn_increase_time_to {
-  // background-color: $charcoal;
+.working.btn_timer {
   padding: 8px 12px;
-  color: $lavender;
-  border: none;
-  border-radius: 9999px;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: Arial, sans-serif;
+  display: flex;
+  gap: 0.3rem;
 }
 
-// stopwatch
-
-.stopwatch_content {
+.working.btn_stopwatch {
+  padding: 8px 12px;
+  display: flex;
+  gap: 0.3rem;
 }
+//Button styles if they're paused
 
-.stopwatch_content_working {
-  .btn_stop {
-    background-color: $charcoal;
-
-    i{
-        color: $lavender;
-    }
-  }
-
-  .btn_restart {
-    background-color: $charcoal;
-
-    i{
-        color: $lavender;
-    }
+.paused.btn {
+  background-color: $black-olive;
+  color: $antique-white;
+  i {
+    color: $xanthous;
   }
 }
 
-.stopwatch_content_paused {
-  .btn_stop {
-    background-color: $field-drab;
+.paused.btn_background {
+  background-color: $field-drab;
+  color: $antique-white;
 
-    i{
-        color: $lavender;
-    }
-  }
-
-  .btn_restart {
-    background-color: $field-drab;
-
-    i{
-        color: $lavender;
-    }
+  i {
+    color: $antique-white;
   }
 }
+
+.paused.btn_increase_time_to {
+  background-color: $taupe;
+  color: $antique-white;
+}
+
+.paused.btn_stop {
+  background-color: $field-drab;
+  i {
+    color: $lavender;
+  }
+}
+
+.paused.btn_restart {
+  background-color: $field-drab;
+  i {
+    color: $lavender;
+  }
+}
+
+//Button styles when they reach the end
+.finished.btn_stop {
+  display: none;
+}
+
+.finished.btn_restart {
+  background-color: $claret;
+  color: $lavender-blush;
+  width: 100%;
+}
+

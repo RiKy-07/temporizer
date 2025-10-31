@@ -8,11 +8,11 @@
   </head>
   <body>
     <section class="wrapper">
-      <header class="header_wrapper">
+      <header class="header_wrapper timer_header_wrapper">
         <div class="mode_options">
           <div>
             <button
-              class="btn btn_mode_options btn_background btn_mode_options_timer btn_timer"
+              class="btn btn_background btn_timer"
             >
               <i class="fa-solid fa-check fa-xl"></i>
               <p>Temporizador</p>
@@ -20,7 +20,7 @@
           </div>
           <div>
             <button
-              class="btn btn_mode_options btn_mode_options_stopwatch btn_stopwatch"
+              class="btn btn_stopwatch"
             >
               <i class="fa-solid fa-stopwatch fa-xl"></i>
               <p>Cronómetro</p>
@@ -28,12 +28,12 @@
           </div>
         </div>
         <div class="funcionalities_options">
-          <div>
+          <button class="btn btn_sound">
             <i class="fa-solid fa-volume-high fa-xl"></i>
-          </div>
-          <div>
+          </button>
+          <button class="btn btn_expand">
             <i class="fa-solid fa-expand fa-xl"></i>
-          </div>
+          </button>
         </div>
       </header>
 
@@ -64,7 +64,7 @@
                   </button>
                 </div>
               </div>
-              
+
             </div>
             <div class="start">
               <button class="btn btn_start timer_btn_start">
@@ -88,9 +88,8 @@
           </div>
         </div>
 
-        <div class="container_buttons">
           <div class="start">
-            <button class="btn btn_start stopwatch_btn_start btn_timer">
+            <button class="btn btn_start stopwatch_btn_start">
               <i class="fa-solid fa-play fa-sm"></i>
             </button>
           </div>
@@ -102,7 +101,6 @@
               <i class="fa-solid fa-rotate-left fa-sm"></i>
             </button>
           </div>
-        </div>
       </div>
     </section>
 
