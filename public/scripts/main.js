@@ -3,6 +3,7 @@ let timer_interval;
 let header_btn = document.querySelectorAll(".header_wrapper button.btn");
 let content_btn;
 let btn_status = document.querySelector("button.btn");
+let header_wrapper;
 
 let timeInput = document.querySelector("#current_time");
 let timer_startBtn = document.querySelector(".timer_btn_start");
@@ -28,12 +29,30 @@ btn_stopwatch.onclick = () => {
 
     stopwatch_content.style.display = "flex";
 
-    if(timer_content.classList.contains("paused") && header_btn.classList.contains("paused")){
-      for(btn_status of header_btn){
-      header_btn.classList.replace("paused", "working");
-      }
-    }
   }
+
+  if(stopwatch_content.classList.contains("stopwatch_content_paused")){
+
+    for(btn_status of header_btn){
+    btn_status.classList.remove("working");
+    btn_status.classList.add("paused");
+   }
+  }
+
+  if(stopwatch_content.classList.contains("stopwatch_content_working")){
+
+    for(btn_status of header_btn){
+    btn_status.classList.remove("paused");
+    btn_status.classList.add("working");
+   }
+  } 
+
+  if(stopwatch_content.classList.contains("stopwatch_content")){
+    for(btn_status of header_btn){
+     btn_status.classList.remove("working", "paused");
+   }
+  }
+
 };
 
 btn_timer.onclick = () => {
@@ -45,6 +64,36 @@ btn_timer.onclick = () => {
     stopwatch_content.classList.add("disable-element");
 
     stopwatch_content.style.display = "";
+  }
+
+    if(timer_content.classList.contains("timer_content_paused")){
+
+    for(btn_status of header_btn){
+    btn_status.classList.remove("working", "finished");
+    btn_status.classList.add("paused");
+   }
+  }
+
+   if(timer_content.classList.contains("timer_content_working")){
+
+    for(btn_status of header_btn){
+     btn_status.classList.remove("paused", "finished");
+    btn_status.classList.add("working");
+   }
+  }
+
+  if(timer_content.classList.contains("timer_content_finished")){
+
+    for(btn_status of header_btn){
+     btn_status.classList.remove("paused", "working");
+    btn_status.classList.add("finished");
+   }
+  }
+
+  if(timer_content.classList.contains("timer_content")){
+    for(btn_status of header_btn){
+     btn_status.classList.remove("working", "paused", "finished");
+   }
   }
 };
 
@@ -112,7 +161,7 @@ function stop_timer() {
 
 timer_startBtn.addEventListener("click", () => {
   const icon = timer_startBtn.querySelector("i");
-  let header_btn = document.querySelectorAll(".header_wrapper button.btn");
+  // let header_btn = document.querySelectorAll(".header_wrapper button.btn");
   let content_btn = timer_content.querySelectorAll("button.btn");
   let btn_status = timer_content.querySelector("button.btn");
 
