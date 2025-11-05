@@ -1,9 +1,7 @@
 let timer_interval;
 
 let header_btn = document.querySelectorAll(".header_wrapper button.btn");
-let content_btn;
 let btn_status = document.querySelector("button.btn");
-let header_wrapper;
 
 let timeInput = document.querySelector("#current_time");
 let timer_startBtn = document.querySelector(".timer_btn_start");
@@ -12,12 +10,14 @@ let timer_restartBtn = document.querySelector(".timer_btn_restart");
 
 let increaseTime = document.querySelector(".increase_time");
 let ui_container = document.querySelector(".wrapper");
-
+let count = 360
 const btn_timer = ui_container.querySelector(".btn_timer");
 const btn_stopwatch = ui_container.querySelector(".btn_stopwatch");
 
 const timer_content = ui_container.querySelector(".timer_content");
 const stopwatch_content = ui_container.querySelector(".stopwatch_content");
+
+const circle = document.querySelector(".time");
 
 btn_stopwatch.onclick = () => {
   if (!btn_stopwatch.classList.contains("btn_background")) {
@@ -127,10 +127,50 @@ function timer_get_current_time() {
 }
 
 function timer_update_display(minutes, seconds) {
-  let formatted =
-    String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+  let formatted;
+  // timeInput.value = formatted;
+  if(minutes<10){
+  formatted = String(minutes).padStart(1) + ":" + String(seconds).padStart(2, "0");
   timeInput.value = formatted;
+  }
+
+  if(minutes==0){
+    formatted = String(seconds);
+    timeInput.value = formatted; 
+  }
+
 }
+
+function get_time_in_seconds () {
+  const time_in_seconds = (timer_get_current_time().minutes)*60 + timer_get_current_time().seconds;
+ console.log('=',count)
+  return count;
+}
+
+get_time_in_seconds();
+
+function update_circle_progress(){
+
+ 
+
+let minutes = timer_get_current_time().minutes;
+let seconds = timer_get_current_time().seconds;
+
+const time_in_seconds = get_time_in_seconds();
+
+let step = 360/time_in_seconds;
+
+if(timer_content.classList.contains("timer_content_working")){
+    circle.style.backgroundImage = `conic-gradient(#B1C5FF ${ time_in_seconds}deg, #3A3F50 0deg)`
+}
+// else if(timer_content.classList.contains("timer_content_paused")){
+//   circle.style.backgroundImage = ``
+//   circle.style.backgroundImage = `conic-gradient(#F7BD54 ${seconds}deg, #3A3F50 0deg)`
+// }
+
+}
+
+update_circle_progress();
 
 function start_timer() {
   clearInterval(timer_interval);
@@ -138,8 +178,23 @@ function start_timer() {
   let { minutes, seconds } = timer_get_current_time();
 
   timer_interval = setInterval(() => {
+    count--
     if (minutes == 0 && seconds == 0) {
+      let content_btn = timer_content.querySelectorAll("button.btn");
+
+      timer_content.classList.replace("timer_content_working", "timer_content_finished");
+      
+      for(btn_status of header_btn){
+        btn_status.classList.remove("working", "paused");
+        btn_status.classList.add("finished");
+        count = 360
+      }
+      for(btn_status of content_btn){
+        btn_status.classList.remove("working", "paused");
+        btn_status.classList.add("finished");
+      }
       stop_timer();
+      
     } else {
       seconds--;
 
@@ -150,7 +205,9 @@ function start_timer() {
         seconds = 59;
         minutes--;
       }
+
     }
+    update_circle_progress()
     timer_update_display(minutes, seconds);
   }, 1000);
 }
@@ -159,14 +216,23 @@ function stop_timer() {
   clearInterval(timer_interval);
 }
 
+
+// circle.style.background = `conic-gradient($periwinkle ${progress} deg, $charcoal 0deg)`;
+
+// circle.style.backgroundImage = `conic-gradient(#B1C5FF ${progress}deg, #3A3F50 0deg)`;
+// circle.style.backgroundColor = `#B1C5FF`;
+
+
 timer_startBtn.addEventListener("click", () => {
   const icon = timer_startBtn.querySelector("i");
-  // let header_btn = document.querySelectorAll(".header_wrapper button.btn");
+  let header_btn = document.querySelectorAll(".header_wrapper button.btn");
   let content_btn = timer_content.querySelectorAll("button.btn");
   let btn_status = timer_content.querySelector("button.btn");
 
+  
   if (icon.classList.contains("fa-play") && timer_content.classList.contains("timer_content")) {
     timer_content.classList.replace("timer_content", "timer_content_working");
+    circle.style.background = "conic-gradient($periwinkle 1deg, $charcoal 0deg);"
 
     for (btn_status of header_btn) {
       btn_status.classList.add("working");
@@ -174,6 +240,7 @@ timer_startBtn.addEventListener("click", () => {
     for (btn_status of content_btn) {
       btn_status.classList.add("working");
     }
+    
     start_timer();
   }
 });
@@ -241,6 +308,7 @@ timer_restartBtn.addEventListener("click", () => {
   } else if (icon.classList.contains("fa-rotate-left") && timer_content.classList.contains("timer_content_finished")) {
     timer_content.classList.replace("timer_content_finished", "timer_content");
     icon.classList.replace("fa-play", "fa-pause");
+    timer_update_display(5, 0);
     for (btn_status of header_btn) {
       btn_status.classList.remove("finished");
     }
@@ -294,15 +362,11 @@ increaseTime.addEventListener("click", (event) => {
 
 let startTime = document.querySelector("#stopwatch");
 
-
-
 let stopwatch_interval;
 
 function stopwatch_get_current_time() {
   let current_time = startTime.innerHTML;
-  let [hours, minutes, seconds, miliseconds] = current_time
-    .split(".")
-    .map(Number);
+  let [hours, minutes, seconds, miliseconds] = current_time.split(".").map(Number);
 
   if (minutes >= 60) {
     hours++;
@@ -320,16 +384,23 @@ function stopwatch_get_current_time() {
 }
 
 function stopwatch_update_display(hours, minutes, seconds, miliseconds) {
-  let formatted =
-    String(hours).padStart(2, "0") +
-    "." +
-    String(minutes).padStart(2, "0") +
-    "." +
-    String(seconds).padStart(2, "0") +
-    "." +
-    String(miliseconds).padStart(2, "0");
+  let formatted = String(hours).padStart(2, 0) + "." + String(minutes).padStart(2, "0") + "." + String(seconds).padStart(2, "0") + "." + String(miliseconds).padStart(2, "0"); ;
   startTime.innerHTML = formatted;
-  // startTime.innerHTML = toString(hours).padStart(2,"0") + "." + toString(minutes).padStart(2,"0") + "." + toString(seconds).padStart(2,"0") + "." + toString(miliseconds).padStart(2,"0");
+
+  // if(hours>=1){
+  //   formatted = + String(hours) + "." + String(minutes).padStart(2, "0") + "." + String(seconds).padStart(2, "0") + "." + String(miliseconds).padStart(2, "0");
+  //   startTime.innerHTML = formatted;
+  // }
+
+  // if(minutes<60 && hours<1){
+  //   formatted = String(minutes) + "." + String(seconds).padStart(2, "0") + "." + String(miliseconds).padStart(2, "0");
+  //   startTime.innerHTML = formatted;
+  // }
+
+  // if(seconds<60 && minutes<1){
+  //   formatted = String(seconds) + "." + String(miliseconds).padStart(2, "0");
+  //   startTime.innerHTML = formatted;
+  // }
 }
 
 function start_stopwatch() {
@@ -436,6 +507,7 @@ stopwatch_restartBtn.addEventListener("click", () => {
     for (btn_status of content_btn) {
       btn_status.classList.remove("working");
     }
+    
     stop_stopwatch();
   } else if (icon.classList.contains("fa-rotate-left") && stopwatch_content.classList.contains("stopwatch_content_paused") ) {
     stopwatch_content.classList.replace(
@@ -452,7 +524,9 @@ stopwatch_restartBtn.addEventListener("click", () => {
     for (btn_status of content_btn) {
       btn_status.classList.remove("paused");
     }
+
     stop_stopwatch();
   }
 
 });
+

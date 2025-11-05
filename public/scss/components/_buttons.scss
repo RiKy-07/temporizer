@@ -177,6 +177,65 @@
 }
 
 //Button styles when they reach the end
+.finished.btn {
+  padding: 8px 12px;
+  border: none;
+  width: 126.183;
+  height: 36px;
+  border-radius: 9999px;
+  display: flex;
+  gap: 0.3rem;
+  background-color: $van-dyke;
+  color: $cherry-blossom-pink;
+  i {
+    color: $cherry-blossom-pink;
+  }
+}
+
+.finished.btn_background {
+  background-color: $claret;
+  color: lavender;
+
+  i {
+    color: $cherry-blossom-pink;
+  }
+}
+
+.finished.btn_timer {
+  padding: 8px 12px;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.finished.btn_stopwatch {
+  padding: 8px 12px;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.finished.btn_sound {
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+        color: $cherry-blossom-pink;
+  }
+}
+
+.finished.btn_expand {
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+    color: $cherry-blossom-pink;
+  }
+}
 .finished.btn_stop {
   display: none;
 }
